@@ -129,7 +129,7 @@ class _ProfileState extends State<Profile> {
       if (value == 1) {
         // Toast.show("Successfully Deleted",context);
         Fluttertoast.showToast(
-            msg: "${_conUserName.text}, Successfully LogOut");
+            msg: "${_conUserName.text}, Successfully SignOut");
 
         updateSP(
                 UserModel(
