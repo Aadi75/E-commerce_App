@@ -26,8 +26,7 @@ void main() async {
   }
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-   home: email == null ? SplashScreen() : HomePage(),
-
+    home: email == null ? SplashScreen() : HomePage(),
   ));
 }
 
@@ -38,6 +37,5 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 );
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-
 
 //\u{20B9}

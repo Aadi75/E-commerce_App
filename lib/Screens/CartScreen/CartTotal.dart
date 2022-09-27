@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, file_names
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, file_names, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +17,7 @@ class _CartTotalState extends State<CartTotal> {
 
   @override
   Widget build(BuildContext context) {
+    print("object");
     return SafeArea(
       child: Obx(
         () => Row(
