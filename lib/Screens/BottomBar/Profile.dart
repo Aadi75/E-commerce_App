@@ -198,7 +198,7 @@ class _ProfileState extends State<Profile> {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       image: _image == null
-                          ? AssetImage("assets/Images/icons8-person-96.png")
+                          ? NetworkImage(photo)
                           : FileImage(File(_image.path)),
                     ),
                   ),
@@ -209,24 +209,30 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             SizedBox(height: 10),
-            Text(_conUserName.text,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20)),
+            _conUserName.text.isEmpty
+                ? Text(name,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20))
+                : Text(_conUserName.text,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18)),
+            _conEmail.text.isEmpty
+                ? Text(email,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20))
+                : Text(_conEmail.text,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)),
             SizedBox(height: 10),
-            Text(_conEmail.text,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18)),
-            SizedBox(height: 10),
-            Text(_conMobile.text,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18)),
-            SizedBox(height: 15),
+
             Container(
               margin: EdgeInsets.all(5),
               decoration: BoxDecoration(

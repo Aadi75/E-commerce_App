@@ -62,30 +62,38 @@ class _Razer_PayState extends State<Razer_Pay> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 30.0),
-                child: TextField(
-                  controller: amountController,
-                  // placeholder: "\u{20B9}${controller.total}",
-                  decoration: InputDecoration(hintText: "Enter Amount"),
-                ),
+              SizedBox(height: 15),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [BoxShadow(color: Colors.black, blurRadius: 2)]),
+                // child: TextField(
+                //   controller: amountController,
+                //   // placeholder: "\u{20B9}${controller.total}",
+                //   decoration: InputDecoration(hintText: "Enter Amount", ),
+                // ),
+                child: Text("\u{20B9}${controller.total}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
               ),
+              SizedBox(height: 30),
               CupertinoButton(
-                  color: Colors.grey,
-                  child: Text("Pay Amount"),
+                  color: Colors.blue,
+                  child: Text("Pay Amount", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                   onPressed: () {
                     ///Make Payment
                     var options = {
                       'key': 'rzp_test_Hp3hGpygZX3F6d',
-                      'amount':
-                          (int.parse("\u{20B9}${controller.total}")).toString(),
-                      'name': 'name',
-                      'description': 'Fine T-Shirt',
-                      'timeout': 300, //In seconds
+                      'amount': (Uri.parse('${controller.total}')).toString() * 100,
+                      'name': 'Open Fashion',
+                      'timeout': 1000, //In seconds
                       'prefill': {
-                        'contact': '9123456789',
-                        'email': 'gaurav.kumar@example.com'
+                        'contact': '9123456780',
+                        'email': 'aditya.17@gmail.com'
                       }
                     };
                     _razorpay.open(options);

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_app/Controller/cart_controller.dart';
 import 'package:shopping_app/DataBase/Model/products_model.dart';
-import 'package:shopping_app/Screens/CartScreen/Cart.dart';
 
 class CartProducts extends StatefulWidget {
   const CartProducts({Key key}) : super(key: key);
@@ -82,7 +81,9 @@ class CartProductCard extends StatelessWidget {
                     },
                     icon: Icon(Icons.add_circle)),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+
+                    },
                     icon: Icon(Icons.delete, color: Colors.red)),
               ],
             ),

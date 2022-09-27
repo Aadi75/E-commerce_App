@@ -24,8 +24,13 @@ class CartController extends GetxController {
     if (_products.containsKey(products) && _products[product] == 1) {
       _products.removeWhere((key, value) => key == product);
     } else {
-      _products[product] -= 1 ;
+      _products[product] -= 1;
     }
+  }
+
+  void removeItem(int id) {
+    final index = _products[products].indexWhere((element) => element.id == id);
+    products.removeAt(index);
   }
 
   get productSubtotal => _products.entries
@@ -37,9 +42,4 @@ class CartController extends GetxController {
       .toList()
       .reduce((value, element) => value + element)
       .toStringAsFixed(2);
-
-  // get rmv => _products.entries
-  //     .map((product) => product.key.price * product.value)
-  //     .toList()
-  //     .remove;
 }

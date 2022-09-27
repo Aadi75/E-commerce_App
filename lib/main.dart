@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, depend_on_referenced_packages, camel_case_types, avoid_print
+// ignore_for_file: prefer_const_constructors, depend_on_referenced_packages, camel_case_types, avoid_print, unrelated_type_equality_checks
 
 import 'dart:io';
 
@@ -21,10 +21,14 @@ void main() async {
             appId: "1:969801338697:android:1ab3007f68f94aef479498",
             messagingSenderId: "969801338697",
             projectId: "e-commerce-app-bc2dd"));
+  } else {
+    Firebase.initializeApp();
   }
   runApp(GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: email == null ? SplashScreen() : HomePage()));
+    debugShowCheckedModeBanner: false,
+   home: email == null ? SplashScreen() : HomePage(),
+
+  ));
 }
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(

@@ -26,14 +26,16 @@ class _CartState extends State<Cart> {
                 fontWeight: FontWeight.bold,
                 fontSize: 25)),
       ),
-      body: SizedBox(
-        child: ListView(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CartProducts(),
-            BottomAppBar(child: CartTotal()),
+            BottomAppBar(
+                child: CartTotal()),
           ],
         ),
-      )
+      ),
     );
   }
 }

@@ -173,6 +173,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 SizedBox(height: screenHeight * .02),
                 TextFormField(
+                  maxLength: 10,
                   inputFormatters: [
                     FilteringTextInputFormatter(RegExp(r'[0-9]'),
                         allow: true)
@@ -196,6 +197,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 SizedBox(height: screenHeight * .02),
                 TextFormField(
+                  maxLength: 2,
                   inputFormatters: [
                     FilteringTextInputFormatter(RegExp(r'[0-9]'),
                         allow: true)
