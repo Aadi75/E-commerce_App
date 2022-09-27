@@ -26,13 +26,27 @@ class _CartState extends State<Cart> {
                 fontWeight: FontWeight.bold,
                 fontSize: 25)),
       ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(color: Colors.black, blurRadius: 5, spreadRadius: 3)
+          ],
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: CartTotal()
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CartProducts(),
-            BottomAppBar(
-                child: CartTotal()),
+            // BottomAppBar(
+            //     child: CartTotal()),
           ],
         ),
       ),
