@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, file_names
+// ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:shopping_app/Screens/CartScreen/CartProducts.dart';
+import 'package:shopping_app/Screens/CartScreen/CartTotal.dart';
 
 class Cart extends StatefulWidget {
   const Cart({Key key}) : super(key: key);
@@ -16,6 +17,7 @@ class _CartState extends State<Cart> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         title: Text("Cart",
@@ -26,8 +28,10 @@ class _CartState extends State<Cart> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Lottie.asset("assets/Images/404.json")],
+          children: [
+            CartProducts(),
+            CartTotal(),
+          ],
         ),
       ),
     );

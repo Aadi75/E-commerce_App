@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_app/DataBase/DB_Helper/databse_Helper.dart';
 import 'package:shopping_app/DataBase/Model/user_Model.dart';
 import 'package:shopping_app/Screens/Login/LoginScreen.dart';
-import 'package:shopping_app/Screens/MapScreen.dart';
+import 'package:shopping_app/Screens/ProfileScreen/MapScreen.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -21,17 +21,17 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  Image image;
+  File _image;
 
   pickImage(ImageSource source) async {
-    final _image = await ImagePicker.platform.pickImage(source: source);
+    final image = await ImagePicker.platform.pickImage(source: source);
 
-    if (_image != null) {
+    if (image != null) {
       setState(() {
-        image = Image.file(File(_image.path));
+        _image = File(image.path);
       });
       ImageSharedPrefs.saveImageToPrefs(
-          ImageSharedPrefs.base64String(await _image.readAsBytes()));
+          ImageSharedPrefs.base64String(await image.readAsBytes()));
     } else {
       print('Error picking image!');
     }
@@ -43,7 +43,7 @@ class _ProfileState extends State<Profile> {
     if (imageKeyValue != null) {
       final imageString = await ImageSharedPrefs.loadImageFromPrefs();
       setState(() {
-        image = ImageSharedPrefs.imageFrom64BaseString(imageString);
+        _image = ImageSharedPrefs.imageFrom64BaseString(imageString);
       });
     }
   }
@@ -120,7 +120,7 @@ class _ProfileState extends State<Profile> {
   delete() async {
     ImageSharedPrefs.emptyPrefs();
     setState(() {
-      image = null;
+      _image = null;
     });
     //await auth.signOut();
     String delUserID = _conDelUserId.text;
@@ -186,37 +186,28 @@ class _ProfileState extends State<Profile> {
         padding: EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            // ListTile(
-            //   leading: Icon(Icons.camera),
-            //   title: Text('Camera'),
-            //   onTap: () {
-            //     pickImage(ImageSource.gallery);
-            //     // this is how you dismiss the modal bottom sheet after making a choice
-            //   },
-            // ),
             GestureDetector(
               onTap: () {
                 pickImage(ImageSource.gallery);
               },
               child: CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.black38,
                 radius: 100,
                 child: Container(
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: image == null
-                              ? Text('No image selected')
-                              : image.image)),
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: _image == null
+                          ? AssetImage("assets/Images/icons8-person-96.png")
+                          : FileImage(File(_image.path)),
+                    ),
+                  ),
+                  // child: _image == null
+                  //     ? Image.asset('assets/Images/icons8-person-96.png')
+                  //     : Image.file(_image),
                 ),
               ),
             ),
-            // CircleAvatar(
-            //   radius: 100,
-            //   backgroundColor: Colors.white,
-            //   child: Center(
-            //       child: image == null ? Text('No image selected') : image),
-            // ),
             SizedBox(height: 10),
             Text(_conUserName.text,
                 style: TextStyle(

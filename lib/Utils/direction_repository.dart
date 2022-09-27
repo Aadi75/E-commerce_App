@@ -2,8 +2,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:shopping_app/.env.dart';
 import 'package:shopping_app/DataBase/Model/direction_model.dart';
+import 'package:shopping_app/Utils/.env.dart';
 
 class DirectionRepository {
   static String _baseUrl =

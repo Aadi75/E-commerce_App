@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:shopping_app/Utils/Constant.dart';
+import 'package:get/get.dart';
+import 'package:shopping_app/Controller/cart_controller.dart';
+import 'package:shopping_app/DataBase/Model/products_model.dart';
+import 'package:shopping_app/Screens/CartScreen/Cart.dart';
 
 class Accessories extends StatefulWidget {
   const Accessories({Key key}) : super(key: key);
@@ -12,6 +15,8 @@ class Accessories extends StatefulWidget {
 }
 
 class _AccessoriesState extends State<Accessories> {
+
+  final cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,29 +41,48 @@ class _AccessoriesState extends State<Accessories> {
           ),
           Expanded(
             child: GridView.builder(
-                gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
                 scrollDirection: Axis.vertical,
-                itemCount: menAccessories.length,
+                itemCount: Product.menAccessories.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Image.network(menAccessories[index]['images'],
-                          height: 100, width: 100),
-                      Text(menAccessories[index]['price'],
+                      Image.network(Product.menAccessories[index].images,
+                          height: 90),
+                      Text(Product.menAccessories[index].name,
                           style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18)),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16)),
+                      Text("\u{20B9}${Product.menAccessories[index].price}",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15)),
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.black),
-                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black38, elevation: 2.0),
+                          onPressed: () {
+                            cartController.addProduct(Product.menAccessories[index]);
+                          },
                           child: Text("Add To Cart",
-                              style: TextStyle(color: Colors.white, fontSize: 15)))
+                              style:
+                              TextStyle(color: Colors.white, fontSize: 10)))
                     ],
                   );
                 }),
           ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black
+              ),
+              onPressed: () {
+                Get.to(() => Cart());
+              },
+              child: Text("Go to cart",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600)))
         ],
       ),
     );

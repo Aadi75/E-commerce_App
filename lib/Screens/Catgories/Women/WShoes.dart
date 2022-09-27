@@ -1,8 +1,11 @@
-// ignore_for_file: prefer_const_constructors, file_names
+// ignore_for_file: prefer_const_constructors, file_names, unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:shopping_app/Utils/Constant.dart';
+import 'package:get/get.dart';
+import 'package:shopping_app/Controller/cart_controller.dart';
+import 'package:shopping_app/DataBase/Model/products_model.dart';
+import 'package:shopping_app/Screens/CartScreen/Cart.dart';
 
 class WShoes extends StatefulWidget {
   const WShoes({Key key}) : super(key: key);
@@ -12,6 +15,7 @@ class WShoes extends StatefulWidget {
 }
 
 class _WShoesState extends State<WShoes> {
+  final cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,29 +43,47 @@ class _WShoesState extends State<WShoes> {
           ),
           Expanded(
             child: GridView.builder(
-                gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
                 scrollDirection: Axis.vertical,
-                itemCount: womenShoes.length,
+                itemCount: Product.womenShoes.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Image.network(womenShoes[index]['images'],
-                          height: 100, width: 100),
-                      Text(womenShoes[index]['price'],
+                      Image.network(Product.womenShoes[index].images,
+                          height: 90),
+                      Text(Product.womenShoes[index].name,
                           style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18)),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16)),
+                      Text("\u{20B9}${Product.womenShoes[index].price}",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15)),
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.black),
-                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black38, elevation: 2.0),
+                          onPressed: () {
+                            cartController
+                                .addProduct(Product.womenShoes[index]);
+                          },
                           child: Text("Add To Cart",
-                              style: TextStyle(color: Colors.white, fontSize: 15)))
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10)))
                     ],
                   );
                 }),
           ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+              onPressed: () {
+                Get.to(() => Cart());
+              },
+              child: Text("Go to cart",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600)))
         ],
       ),
     );
@@ -72,8 +94,7 @@ Swiper imageSlider(context) {
   return Swiper(
     autoplay: true,
     itemBuilder: (BuildContext context, int index) {
-      return Image.asset(
-          'assets/Images/discount.jpg');
+      return Image.asset('assets/Images/discount.jpg');
     },
     itemCount: 5,
     viewportFraction: 0.7,

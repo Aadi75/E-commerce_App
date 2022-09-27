@@ -10,10 +10,11 @@ class Directions {
   final String totalDuration;
 
   const Directions(
-      { this.bounds,
-       this.polylinPoints,
-       this.totalDistance,
-       this.totalDuration,  List<PointLatLng> polylinePoints});
+      {this.bounds,
+      this.polylinPoints,
+      this.totalDistance,
+      this.totalDuration,
+      List<PointLatLng> polylinePoints});
 
   factory Directions.fromMap(Map<String, dynamic> map) {
     // Check if route is not available
@@ -42,9 +43,10 @@ class Directions {
     return Directions(
       bounds: bounds,
       polylinePoints:
-      PolylinePoints().decodePolyline(data['overview_polyline']['points']),
+          PolylinePoints().decodePolyline(data['overview_polyline']['points']),
       totalDistance: distance,
-      totalDuration: duration, polylinPoints: [],
+      totalDuration: duration,
+      polylinPoints: [],
     );
   }
 }

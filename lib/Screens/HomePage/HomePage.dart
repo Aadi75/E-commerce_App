@@ -1,18 +1,14 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers, sort_child_properties_last, unnecessary_string_interpolations, prefer_final_fields, camel_case_types, unnecessary_new, file_names
-
-import 'dart:convert';
-import 'dart:io';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers, sort_child_properties_last, unnecessary_string_interpolations, prefer_final_fields, camel_case_types, unnecessary_new, file_names, invalid_use_of_visible_for_testing_member
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_app/DataBase/DB_Helper/databse_Helper.dart';
 import 'package:shopping_app/DataBase/Model/user_Model.dart';
-import 'package:shopping_app/Screens/BottomBar/Cart.dart';
+import 'package:shopping_app/Screens/CartScreen/Cart.dart';
 import 'package:shopping_app/Screens/BottomBar/Categories.dart';
 import 'package:shopping_app/Screens/BottomBar/Profile.dart';
 import 'package:shopping_app/Screens/DrawerScreens/MyOrders.dart';
@@ -20,8 +16,6 @@ import 'package:shopping_app/Screens/DrawerScreens/MyRewards.dart';
 import 'package:shopping_app/Screens/DrawerScreens/Notification.dart';
 import 'package:shopping_app/Screens/DrawerScreens/PrivacyPolicy.dart';
 import 'package:shopping_app/Screens/Login/LoginScreen.dart';
-import 'package:shopping_app/launguage/language_picker_dropdown.dart';
-import 'package:shopping_app/launguage/launguages.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -31,32 +25,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Image image;
-
-  pickImage(ImageSource source) async {
-    final _image = await ImagePicker.platform.pickImage(source: source);
-
-    if (_image != null) {
-      setState(() {
-        image = Image.file(File(_image.path));
-      });
-      ImageSharedPrefs.saveImageToPrefs(IMAGE_KEY);
-    } else {
-      print('Error picking image!');
-    }
-  }
-
-  loadImageFromPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final imageKeyValue = prefs.getString(IMAGE_KEY);
-    if (imageKeyValue != null) {
-      final imageString = await ImageSharedPrefs.loadImageFromPrefs();
-      setState(() {
-        image = ImageSharedPrefs.imageFrom64BaseString(imageString);
-      });
-    }
-  }
-
   final _formKey = GlobalKey<FormState>();
   final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
 
@@ -72,7 +40,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getUserData();
-    loadImageFromPrefs;
     dbHelper = DbHelper();
   }
 
@@ -195,7 +162,7 @@ class _HomePageState extends State<HomePage> {
     {
       'imageUrl': "assets/Images/female.png",
       'name': "Dresses & Tops",
-      'discount': "From 99"
+      'discount': "From \u{20B9}99"
     },
     {
       'imageUrl': "assets/Images/watch.png",
@@ -205,12 +172,12 @@ class _HomePageState extends State<HomePage> {
     {
       'imageUrl': "assets/Images/male_modle.png",
       'name': "T-Shirts",
-      'discount': "Starting @99"
+      'discount': "Starting \u{20B9}99"
     },
     {
       'imageUrl': "assets/Images/shirt_modle.png",
       'name': "Causal Shirts",
-      'discount': "Extra 100 off"
+      'discount': "Extra \u{20B9}100 off"
     },
   ];
 
@@ -226,7 +193,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           ElevatedButton(
               style:
-                  ElevatedButton.styleFrom(primary: Colors.white, elevation: 0),
+                  ElevatedButton.styleFrom(backgroundColor: Colors.white, elevation: 0),
               onPressed: () {
                 // method to show the search bar
                 showSearch(
@@ -237,7 +204,7 @@ class _HomePageState extends State<HomePage> {
               child: SvgPicture.asset('assets/Images/Search.svg')),
           ElevatedButton(
               style:
-                  ElevatedButton.styleFrom(primary: Colors.white, elevation: 0),
+                  ElevatedButton.styleFrom(backgroundColor: Colors.white, elevation: 0),
               onPressed: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Cart()));
@@ -260,7 +227,8 @@ class _HomePageState extends State<HomePage> {
                     Theme.of(context).platform == TargetPlatform.iOS
                         ? Colors.grey
                         : Colors.white,
-                child: Icon(Icons.person, color: Colors.black45, size: 40),
+                child: Image.asset('assets/Images/icons8-person-96.png',
+                    height: 40, width: 40),
               ),
             ),
             ListTile(
@@ -316,34 +284,34 @@ class _HomePageState extends State<HomePage> {
               trailing: Icon(Icons.keyboard_arrow_right,
                   color: Colors.white, size: 20),
             ),
-            ListTile(
-              onTap: () {
-                // LanguagePickerUtils();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LanguagePickerDropdown(
-                              onValuePicked: (Language value) {},
-                              itemBuilder: (Language language) {
-                                return build(context);
-                              },
-                              initialValue: '',
-                              languagesList: [],
-                            )));
-              },
-              leading: Icon(
-                Icons.language,
-                size: 30,
-                color: Colors.white,
-              ),
-              title: Text("Language",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18)),
-              trailing: Icon(Icons.keyboard_arrow_right,
-                  size: 20, color: Colors.white),
-            ),
+            // ListTile(
+            //   onTap: () {
+            //     // LanguagePickerUtils();
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => LanguagePickerDropdown(
+            //                   onValuePicked: (Language value) {},
+            //                   itemBuilder: (Language language) {
+            //                     return build(context);
+            //                   },
+            //                   initialValue: '',
+            //                   languagesList: [],
+            //                 )));
+            //   },
+            //   leading: Icon(
+            //     Icons.language,
+            //     size: 30,
+            //     color: Colors.white,
+            //   ),
+            //   title: Text("Language",
+            //       style: TextStyle(
+            //           color: Colors.white,
+            //           fontWeight: FontWeight.w600,
+            //           fontSize: 18)),
+            //   trailing: Icon(Icons.keyboard_arrow_right,
+            //       size: 20, color: Colors.white),
+            // ),
             ListTile(
               onTap: () {
                 Navigator.push(context,
@@ -728,40 +696,6 @@ class CustomSearchDelegate extends SearchDelegate {
           title: Text(result),
         );
       },
-    );
-  }
-}
-
-const IMAGE_KEY = 'IMAGE_KEY';
-
-class ImageSharedPrefs {
-  static Future<bool> saveImageToPrefs(String value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    return await prefs.setString(IMAGE_KEY, value);
-  }
-
-  static Future<bool> emptyPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    return await prefs.clear();
-  }
-
-  static Future<String> loadImageFromPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(IMAGE_KEY);
-  }
-
-  // encodes bytes list as string
-  static String base64String(Uint8List data) {
-    return base64Encode(data);
-  }
-
-  // decode bytes from a string
-  static imageFrom64BaseString(String base64String) {
-    return Image.memory(
-      base64Decode(base64String),
-      fit: BoxFit.fill,
     );
   }
 }

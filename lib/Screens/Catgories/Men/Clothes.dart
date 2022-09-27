@@ -2,6 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:get/get.dart';
+import 'package:shopping_app/Controller/cart_controller.dart';
+import 'package:shopping_app/DataBase/Model/products_model.dart';
+import 'package:shopping_app/Screens/CartScreen/Cart.dart';
 import 'package:shopping_app/Utils/Constant.dart';
 
 class Clothes extends StatefulWidget {
@@ -12,6 +16,8 @@ class Clothes extends StatefulWidget {
 }
 
 class _ClothesState extends State<Clothes> {
+
+  final cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,29 +42,48 @@ class _ClothesState extends State<Clothes> {
           ),
           Expanded(
             child: GridView.builder(
-                gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
                 scrollDirection: Axis.vertical,
-                itemCount: menClothes.length,
+                itemCount: Product.menClothes.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Image.network(menClothes[index]['images'],
-                          height: 100, width: 100),
-                      Text(menClothes[index]['price'],
+                      Image.network(Product.menClothes[index].images,
+                          height: 90),
+                      Text(Product.menClothes[index].name,
                           style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18)),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16)),
+                      Text("\u{20B9}${Product.menClothes[index].price}",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15)),
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.black),
-                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black38, elevation: 2.0),
+                          onPressed: () {
+                            cartController.addProduct(Product.menClothes[index]);
+                          },
                           child: Text("Add To Cart",
-                              style: TextStyle(color: Colors.white, fontSize: 15)))
+                              style:
+                              TextStyle(color: Colors.white, fontSize: 10)))
                     ],
                   );
                 }),
           ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black
+              ),
+              onPressed: () {
+                Get.to(() => Cart());
+              },
+              child: Text("Go to cart",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600)))
         ],
       ),
     );

@@ -3,9 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/Screens/Catgories/Beauty%20and%20Wellness.dart';
 import 'package:shopping_app/Screens/Catgories/Electronics.dart';
-import 'package:shopping_app/Screens/Catgories/Furniture.dart';
-import 'package:shopping_app/Screens/Catgories/Kids/KClothes.dart';
-import 'package:shopping_app/Screens/Catgories/Kids/KShoes.dart';
 import 'package:shopping_app/Screens/Catgories/Kitchen.dart';
 import 'package:shopping_app/Screens/Catgories/Laggage.dart';
 import 'package:shopping_app/Screens/Catgories/Men/Accessories.dart';
@@ -121,43 +118,6 @@ class _CategoriesState extends State<Categories> {
                     ),
                   ],
                 ),
-                ExpansionTile(
-                  title: Text("Kids",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold)),
-                  children: [
-                    ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => KClothes()));
-                      },
-                      title: Text("Clothes",
-                          style: TextStyle(color: Colors.black, fontSize: 18)),
-                    ),
-                    ListTile(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => KShoes()));
-                      },
-                      title: Text("Shoes",
-                          style: TextStyle(color: Colors.black, fontSize: 18)),
-                    ),
-                    ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Accessories()));
-                      },
-                      title: Text("Accessories",
-                          style: TextStyle(color: Colors.black, fontSize: 18)),
-                    ),
-                  ],
-                ),
               ],
             ),
             ExpansionTile(
@@ -175,13 +135,6 @@ class _CategoriesState extends State<Categories> {
                               builder: (context) => Electronics()));
                     },
                     title: Text("Electronics",
-                        style: TextStyle(color: Colors.black, fontSize: 18))),
-                ListTile(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Furniture()));
-                    },
-                    title: Text("Furniture",
                         style: TextStyle(color: Colors.black, fontSize: 18))),
               ],
             ),

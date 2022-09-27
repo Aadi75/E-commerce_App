@@ -34,5 +34,3 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 );
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-
-// API key:-  AIzaSyBdWRTzfWpA9kR2EGt4Arw2H-F2wPMkOLA

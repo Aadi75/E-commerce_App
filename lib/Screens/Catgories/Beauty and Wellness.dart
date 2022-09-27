@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:shopping_app/Utils/Constant.dart';
+import 'package:get/get.dart';
+import 'package:shopping_app/Controller/cart_controller.dart';
+import 'package:shopping_app/DataBase/Model/products_model.dart';
+import 'package:shopping_app/Screens/CartScreen/Cart.dart';
 
 class Beauty extends StatefulWidget {
   const Beauty({Key key}) : super(key: key);
@@ -12,7 +15,7 @@ class Beauty extends StatefulWidget {
 }
 
 class _BeautyState extends State<Beauty> {
-  // DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
+  final cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,40 +44,57 @@ class _BeautyState extends State<Beauty> {
           ),
           Expanded(
             child: GridView.builder(
-                gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
                 scrollDirection: Axis.vertical,
-                itemCount: beauty.length,
+                itemCount: Product.beauty.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Image.network(beauty[index]['images'],
-                          height: 100, width: 100),
-                      Text(beauty[index]['price'],
+                      Image.network(Product.beauty[index].images,
+                          height: 90),
+                      Text(Product.beauty[index].name,
                           style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18)),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16)),
+                      Text("\u{20B9}${Product.beauty[index].price}",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15)),
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.black),
-                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black38, elevation: 2.0),
+                          onPressed: () {
+                            cartController.addProduct(Product.beauty[index]);
+                          },
                           child: Text("Add To Cart",
-                              style: TextStyle(color: Colors.white, fontSize: 15)))
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10)))
                     ],
                   );
                 }),
           ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+              onPressed: () {
+                Get.to(() => Cart());
+              },
+              child: Text("Go to cart",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600)))
         ],
       ),
     );
   }
 }
+
 Swiper imageSlider(context) {
   return Swiper(
     autoplay: true,
     itemBuilder: (BuildContext context, int index) {
-      return Image.asset(
-          'assets/Images/discount.jpg');
+      return Image.asset('assets/Images/discount.jpg');
     },
     itemCount: 5,
     viewportFraction: 0.7,

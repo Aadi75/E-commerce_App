@@ -60,6 +60,7 @@ dependencies:
   dio: ^4.0.6
   flutter_polyline_points: ^1.0.0
   google_maps_flutter: ^2.2.0
+  razorpay_flutter: ^1.3.2
 
 dev_dependencies:
   flutter_test:
@@ -101,6 +102,7 @@ flutter:
     - assets/Images/laptop.png
     - assets/Images/hair_dryer.png
     - assets/Images/discount.jpg
+    - assets/Images/icons8-person-96.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
