@@ -2,16 +2,22 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:shopping_app/Controller/cart_controller.dart';
+import 'package:shopping_app/DataBase/Model/products_model.dart';
 
 class Razer_Pay extends StatefulWidget {
-  const Razer_Pay({Key key}) : super(key: key);
+  final Product product;
+  const Razer_Pay({Key key, this.product}) : super(key: key);
 
   @override
   State<Razer_Pay> createState() => _Razer_PayState();
 }
 
 class _Razer_PayState extends State<Razer_Pay> {
+  final CartController controller = Get.put(CartController());
+
   var _razorpay = Razorpay();
   var amountController = TextEditingController();
 
@@ -54,15 +60,36 @@ class _Razer_PayState extends State<Razer_Pay> {
       body: ListView(
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-                child: CupertinoTextField(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 30.0),
+                child: TextField(
                   controller: amountController,
-                  placeholder: "Enter Your Amount",
-
+                  // placeholder: "\u{20B9}${controller.total}",
+                  decoration: InputDecoration(hintText: "Enter Amount"),
                 ),
-              )
+              ),
+              CupertinoButton(
+                  color: Colors.grey,
+                  child: Text("Pay Amount"),
+                  onPressed: () {
+                    ///Make Payment
+                    var options = {
+                      'key': 'rzp_test_Hp3hGpygZX3F6d',
+                      'amount':
+                          (int.parse("\u{20B9}${controller.total}")).toString(),
+                      'name': 'name',
+                      'description': 'Fine T-Shirt',
+                      'timeout': 300, //In seconds
+                      'prefill': {
+                        'contact': '9123456789',
+                        'email': 'gaurav.kumar@example.com'
+                      }
+                    };
+                    _razorpay.open(options);
+                  })
             ],
           )
         ],

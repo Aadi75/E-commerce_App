@@ -19,8 +19,8 @@ class _CartProductsState extends State<CartProducts> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SizedBox(
-        height: 500,
+      () => Container(
+        padding: EdgeInsets.only(bottom: 500),
         child: ListView.builder(
             shrinkWrap: true,
             itemCount: controller.products.length,
@@ -50,35 +50,42 @@ class CartProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundImage: NetworkImage(product.images),
-          ),
-          SizedBox(width: 20),
-          Expanded(
-              child: Text(product.name,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
-          IconButton(
-              onPressed: () {
-                controller.removeProduct(product);
-              },
-              icon: Icon(Icons.remove_circle)),
-          Text('${quantity}'),
-          IconButton(
-              onPressed: () {
-                controller.addProduct(product);
-              },
-              icon: Icon(Icons.add_circle)),
-          IconButton(
-              onPressed: () {
-                // controller.rmv(product);
-              },
-              icon: Icon(Icons.delete, color: Colors.red)),
-        ],
-      ),
+      child: product == null
+          ? Center(
+              child: Text("Cart Is Empty...",
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20)),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(product.images),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                    child: Text(product.name,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16))),
+                IconButton(
+                    onPressed: () {
+                      controller.removeProduct(product);
+                    },
+                    icon: Icon(Icons.remove_circle)),
+                Text('${quantity}'),
+                IconButton(
+                    onPressed: () {
+                      controller.addProduct(product);
+                    },
+                    icon: Icon(Icons.add_circle)),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.delete, color: Colors.red)),
+              ],
+            ),
     );
   }
 }
