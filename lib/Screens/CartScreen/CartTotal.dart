@@ -19,26 +19,23 @@ class _CartTotalState extends State<CartTotal> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Obx(
-        () => Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text("Total",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              Text("\u{20B9}${controller.total}",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              ElevatedButton(
-                  onPressed: () {
-                    Get.to(() => Razer_Pay());
-                  },
-                  child: Text("Pay",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500)))
-            ],
-            //\u{20B9}
-          ),
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text("Total",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text("\u{20B9}${controller.total}",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            ElevatedButton(
+                onPressed: () {
+                  Get.to(() => Razer_Pay());
+                },
+                child: Text("Pay",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500)))
+          ],
         ),
       ),
     );

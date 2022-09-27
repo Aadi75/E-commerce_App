@@ -38,3 +38,6 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 );
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
+
+
+//\u{20B9}

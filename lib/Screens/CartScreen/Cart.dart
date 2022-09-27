@@ -41,14 +41,7 @@ class _CartState extends State<Cart> {
         child: CartTotal()
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            CartProducts(),
-            // BottomAppBar(
-            //     child: CartTotal()),
-          ],
-        ),
+        child: CartProducts(),
       ),
     );
   }

@@ -53,7 +53,7 @@ class CartProductCard extends StatelessWidget {
           ? Center(
               child: Text("Cart Is Empty...",
                   style: TextStyle(
-                      color: Colors.red,
+                      color: Colors.red[900],
                       fontWeight: FontWeight.bold,
                       fontSize: 20)),
             )
@@ -65,10 +65,18 @@ class CartProductCard extends StatelessWidget {
                   backgroundImage: NetworkImage(product.images),
                 ),
                 SizedBox(width: 20),
-                Expanded(
-                    child: Text(product.name,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16))),
+                Column(children: [
+                  Text(product.name,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                  Text("\u{20B9}${product.price}",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 14))
+                ]),
+                // Expanded(
+                //     child: Text("${product.price}",
+                //         style: TextStyle(
+                //             fontWeight: FontWeight.bold, fontSize: 16))),
                 IconButton(
                     onPressed: () {
                       controller.removeProduct(product);
@@ -81,9 +89,7 @@ class CartProductCard extends StatelessWidget {
                     },
                     icon: Icon(Icons.add_circle)),
                 IconButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.delete, color: Colors.red)),
               ],
             ),
