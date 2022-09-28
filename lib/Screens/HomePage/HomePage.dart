@@ -243,15 +243,22 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 15)),
               currentAccountPicture: CircleAvatar(
-                backgroundColor:
-                    Theme.of(context).platform == TargetPlatform.iOS
-                        ? Colors.grey
-                        : Colors.white,
-                child: /*Image.asset('assets/Images/icons8-person-96.png'*/
-                    photo.isNotEmpty
-                        ? Image.network(photo)
-                        : Image.asset("assets/Images/icons8-person-96.png"),
-              ),
+                radius: 50,
+                  backgroundColor:
+                      Theme.of(context).platform == TargetPlatform.iOS
+                          ? Colors.grey
+                          : Colors.white,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: photo.isNotEmpty
+                              ? NetworkImage(photo)
+                              : AssetImage(
+                                  "assets/Images/icons8-person-96.png")),
+                    ),
+                  ) /*Image.asset('assets/Images/icons8-person-96.png'*/
+                  ),
             ),
             ListTile(
               onTap: () {
