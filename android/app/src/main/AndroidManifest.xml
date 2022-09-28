@@ -23,6 +23,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
@@ -35,5 +37,6 @@
             android:value="AIzaSyBdWRTzfWpA9kR2EGt4Arw2H-F2wPMkOLA" />
 
 
-    </application>
+
+  </application>
 </manifest>

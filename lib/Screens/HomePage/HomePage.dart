@@ -192,8 +192,8 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: [
           ElevatedButton(
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: Colors.white, elevation: 0),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, elevation: 0),
               onPressed: () {
                 // method to show the search bar
                 showSearch(
@@ -203,8 +203,8 @@ class _HomePageState extends State<HomePage> {
               },
               child: SvgPicture.asset('assets/Images/Search.svg')),
           ElevatedButton(
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: Colors.white, elevation: 0),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, elevation: 0),
               onPressed: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Cart()));
@@ -220,15 +220,37 @@ class _HomePageState extends State<HomePage> {
           children: [
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: Colors.black45),
-              accountName: Text(_conUserName.text),
-              accountEmail: Text(_conEmail.text),
+              accountName: _conUserName.text.isEmpty
+                  ? Text(name,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15))
+                  : Text(_conUserName.text,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15)),
+              accountEmail: _conEmail.text.isEmpty
+                  ? Text(email,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15))
+                  : Text(_conEmail.text,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15)),
               currentAccountPicture: CircleAvatar(
                 backgroundColor:
                     Theme.of(context).platform == TargetPlatform.iOS
                         ? Colors.grey
                         : Colors.white,
-                child: Image.asset('assets/Images/icons8-person-96.png',
-                    height: 40, width: 40),
+                child: /*Image.asset('assets/Images/icons8-person-96.png'*/
+                    photo.isNotEmpty
+                        ? Image.network(photo)
+                        : Image.asset("assets/Images/icons8-person-96.png"),
               ),
             ),
             ListTile(

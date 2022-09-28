@@ -24,6 +24,7 @@ class _ProfileState extends State<Profile> {
   File _image;
 
   pickImage(ImageSource source) async {
+    print("Errorrrrr");
     final image = await ImagePicker.platform.pickImage(source: source);
 
     if (image != null) {
@@ -197,10 +198,15 @@ class _ProfileState extends State<Profile> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: _image == null
-                          ? NetworkImage(photo)
-                          : FileImage(File(_image.path)),
-                    ),
+                        image: _image != null
+                            // ? NetworkImage(photo)
+                            //  : FileImage(File(_image.path)),
+                            // : Uri.parse(_image.path),
+                            ? FileImage(_image)
+                            : photo.isNotEmpty
+                                ? NetworkImage(photo)
+                                : AssetImage(
+                                    "assets/Images/icons8-person-96.png")),
                   ),
                   // child: _image == null
                   //     ? Image.asset('assets/Images/icons8-person-96.png')
@@ -232,7 +238,6 @@ class _ProfileState extends State<Profile> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20)),
             SizedBox(height: 10),
-
             Container(
               margin: EdgeInsets.all(5),
               decoration: BoxDecoration(
