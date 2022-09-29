@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, missing_return, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps, prefer_typing_uninitialized_variables, avoid_unnecessary_containers, file_names
+// ignore_for_file: prefer_const_constructors, missing_return, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps, prefer_typing_uninitialized_variables, avoid_unnecessary_containers, file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,10 +45,11 @@ class CartProductCard extends StatelessWidget {
       {Key key, this.controller, this.product, this.quantity, this.index})
       : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10.0),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10.0),
       child: product.name.isEmpty
           ? Center(
               child: Text("Cart Is Empty...",
@@ -89,7 +90,9 @@ class CartProductCard extends StatelessWidget {
                     },
                     icon: Icon(Icons.add_circle)),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      null;
+                    },
                     icon: Icon(Icons.delete, color: Colors.red)),
               ],
             ),

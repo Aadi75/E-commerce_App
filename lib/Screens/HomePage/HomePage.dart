@@ -235,20 +235,21 @@ class _HomePageState extends State<HomePage> {
                   ? Text(email,
                       style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w400,
                           fontSize: 15))
                   : Text(_conEmail.text,
                       style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w400,
                           fontSize: 15)),
               currentAccountPicture: CircleAvatar(
-                radius: 50,
+                  radius: 50,
                   backgroundColor:
                       Theme.of(context).platform == TargetPlatform.iOS
                           ? Colors.grey
                           : Colors.white,
                   child: Container(
+                   // width: 50,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -257,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                               : AssetImage(
                                   "assets/Images/icons8-person-96.png")),
                     ),
-                  ) /*Image.asset('assets/Images/icons8-person-96.png'*/
+                  ) /*Image.asset('assets/Images/icons8-person-96.png')*/
                   ),
             ),
             ListTile(

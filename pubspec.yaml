@@ -16,10 +16,6 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
-homepage: https://github.com/cybex-dev/flutter_language_pickers2
-repository: https://github.com/cybex-dev/flutter_language_pickers2
-documentation: https://github.com/cybex-dev/flutter_language_pickers2/wiki
-issue_tracker: https://github.com/cybex-dev/flutter_language_pickers2/issues
 
 
 environment:

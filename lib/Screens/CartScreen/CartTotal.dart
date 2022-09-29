@@ -17,7 +17,6 @@ class _CartTotalState extends State<CartTotal> {
 
   @override
   Widget build(BuildContext context) {
-    print("object");
     return SafeArea(
       child: Obx(
         () => Row(

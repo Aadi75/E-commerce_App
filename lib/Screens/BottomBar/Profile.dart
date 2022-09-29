@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, slash_for_doc_comments, avoid_print, camel_case_types, no_leading_underscores_for_local_identifiers, prefer_if_null_operators, invalid_use_of_visible_for_testing_member, constant_identifier_names
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, slash_for_doc_comments, avoid_print, camel_case_types, no_leading_underscores_for_local_identifiers, prefer_if_null_operators, invalid_use_of_visible_for_testing_member, constant_identifier_names, void_checks, avoid_init_to_null, missing_return
 
 import 'dart:convert';
 import 'dart:io';
@@ -21,15 +21,16 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  File _image;
+  File _image = null;
 
   pickImage(ImageSource source) async {
-    print("Errorrrrr");
     final image = await ImagePicker.platform.pickImage(source: source);
 
     if (image != null) {
+      //final imagePermanent = await saveImagePermanently(image.path);
       setState(() {
         _image = File(image.path);
+        //_image = imagePermanent;
       });
       ImageSharedPrefs.saveImageToPrefs(
           ImageSharedPrefs.base64String(await image.readAsBytes()));
@@ -38,14 +39,22 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+  // Future<File> saveImagePermanently(String imagePath) async {
+  //   final directory = await getApplicationDocumentsDirectory();
+  //   final name = basename(_image.path);
+  //   final image = File("${directory.path}/$name");
+  // }
+
   loadImageFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final imageKeyValue = prefs.getString(IMAGE_KEY);
     if (imageKeyValue != null) {
       final imageString = await ImageSharedPrefs.loadImageFromPrefs();
-      setState(() {
-        _image = ImageSharedPrefs.imageFrom64BaseString(imageString);
-      });
+      // setState(() {
+      //   _image = ImageSharedPrefs.imageFrom64BaseString(imageString);
+      // });
+      return imageString;
+      //return _image = ImageSharedPrefs.imageFrom64BaseString(imageString);
     }
   }
 
@@ -187,6 +196,7 @@ class _ProfileState extends State<Profile> {
         padding: EdgeInsets.all(8.0),
         child: ListView(
           children: [
+            SizedBox(height: 10),
             GestureDetector(
               onTap: () {
                 pickImage(ImageSource.gallery);
@@ -214,7 +224,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
             _conUserName.text.isEmpty
                 ? Text(name,
                     style: TextStyle(
@@ -225,18 +235,18 @@ class _ProfileState extends State<Profile> {
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: 18)),
+                        fontSize: 20)),
             _conEmail.text.isEmpty
                 ? Text(email,
                     style: TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20))
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17))
                 : Text(_conEmail.text,
                     style: TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17)),
             SizedBox(height: 10),
             Container(
               margin: EdgeInsets.all(5),
@@ -331,6 +341,7 @@ const IMAGE_KEY = 'IMAGE_KEY';
 
 class ImageSharedPrefs {
   static Future<bool> saveImageToPrefs(String value) async {
+    print("object--->");
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     return await prefs.setString(IMAGE_KEY, value);
