@@ -58,9 +58,9 @@ class _Razer_PayState extends State<Razer_Pay> {
     ///Make Payment
     var options = {
       'key': 'rzp_test_Hp3hGpygZX3F6d',
-      'amount': (Uri.parse('${controller.total}')).toString(),
+      'amount': (Uri.parse(controller.total)).toString(),
       'name': 'Open Fashion',
-      'timeout': 1000, //In seconds
+      'timeout': 3000, //In seconds
       'prefill': {'contact': '9123456780', 'email': 'aditya.17@gmail.com'},
       'external': {
         'wallets': ['paytm']

@@ -24,7 +24,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   void dispose() {
-    _googleMapController.dispose();
+    _googleMapController;
     super.dispose();
   }
 
@@ -40,7 +40,7 @@ class _MapScreenState extends State<MapScreen> {
                     CameraUpdate.newCameraPosition(CameraPosition(
                         target: _origin.position, zoom: 14.5, tilt: 50.0))),
                 style: TextButton.styleFrom(
-                    primary: Colors.green,
+                    backgroundColor: Colors.green,
                     textStyle: TextStyle(fontWeight: FontWeight.w600)),
                 child: Text("ORIGIN")),
           if (_destination != null)
@@ -51,7 +51,7 @@ class _MapScreenState extends State<MapScreen> {
                         zoom: 14.5,
                         tilt: 50.0))),
                 style: TextButton.styleFrom(
-                    primary: Colors.blue,
+                    backgroundColor: Colors.blue,
                     textStyle: TextStyle(fontWeight: FontWeight.w600)),
                 child: Text("DEST")),
         ],
@@ -121,7 +121,7 @@ class _MapScreenState extends State<MapScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Colors.black,
-        onPressed: () => _googleMapController.animateCamera(
+        onPressed: () => _googleMapController?.animateCamera(
           _info != null
               ? CameraUpdate.newLatLngBounds(_info.bounds, 100.0)
               : CameraUpdate.newCameraPosition(_initialCameraPosition),
