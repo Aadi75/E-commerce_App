@@ -1,12 +1,15 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, slash_for_doc_comments, avoid_print, camel_case_types, no_leading_underscores_for_local_identifiers, prefer_if_null_operators, invalid_use_of_visible_for_testing_member, constant_identifier_names, void_checks, avoid_init_to_null, missing_return
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, slash_for_doc_comments, avoid_print, camel_case_types, no_leading_underscores_for_local_identifiers, prefer_if_null_operators, invalid_use_of_visible_for_testing_member, constant_identifier_names, void_checks, avoid_init_to_null, missing_return, duplicate_ignore, depend_on_referenced_packages, prefer_typing_uninitialized_variables, sdk_version_constructor_tearoffs, use_build_context_synchronously
 
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+// import 'package:path/path.dart' as path;
+// import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_app/DataBase/DB_Helper/databse_Helper.dart';
 import 'package:shopping_app/DataBase/Model/user_Model.dart';
@@ -21,12 +24,51 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  File _image = null;
+  // File _image;
+  // String myImagePath;
+  //
+  // Future getImage(ImageSource sorce) async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: sorce);
+  //     if (image == null) return;
+  //
+  //     //  final imageTemporary = File(image.path);
+  //     final imagePermanent = await saveFilePermanently(image.path);
+  //
+  //     setState(() {
+  //       // ignore: unnecessary_this
+  //       this._image = imagePermanent;
+  //     });
+  //   } on PlatformException catch (e) {
+  //     // ignore: avoid_print
+  //     print("error $e");
+  //   }
+  // }
+  //
+  // Future<File> saveFilePermanently(String imagePath) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   final directory = await getApplicationDocumentsDirectory();
+  //   final name = path.basename(imagePath);
+  //   final image = File("${directory.path}/$name");
+  //   setState(() {
+  //     prefs.setString("profilImage", image.path);
+  //   });
+  //
+  //   return File(imagePath).copy(image.path);
+  // }
+  //
+  // loadImage() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     myImagePath = prefs.getString("profilImage");
+  //   });
+  // }
+  File _image;
 
   pickImage(ImageSource source) async {
     final image = await ImagePicker.platform.pickImage(source: source);
 
-    if (image != null) {
+    if (image.path.isNotEmpty) {
       //final imagePermanent = await saveImagePermanently(image.path);
       setState(() {
         _image = File(image.path);
@@ -36,14 +78,10 @@ class _ProfileState extends State<Profile> {
           ImageSharedPrefs.base64String(await image.readAsBytes()));
     } else {
       print('Error picking image!');
+      Fluttertoast.showToast(
+          msg: 'Error Picking Image: $_image', timeInSecForIosWeb: 4);
     }
   }
-
-  // Future<File> saveImagePermanently(String imagePath) async {
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   final name = basename(_image.path);
-  //   final image = File("${directory.path}/$name");
-  // }
 
   loadImageFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -73,6 +111,7 @@ class _ProfileState extends State<Profile> {
     super.initState();
     getUserData();
     loadImageFromPrefs();
+    // loadImage();
     dbHelper = DbHelper();
   }
 
@@ -105,7 +144,8 @@ class _ProfileState extends State<Profile> {
       await dbHelper.updateUser(user).then((value) {
         if (value == 1) {
           //   Toast.show("Successfully Updated",context);
-          Fluttertoast.showToast(msg: 'Successfully Updated');
+          Fluttertoast.showToast(
+              msg: 'Successfully Updated', timeInSecForIosWeb: 4);
 
           updateSP(user, true).whenComplete(() {
             Navigator.pushAndRemoveUntil(
@@ -115,14 +155,14 @@ class _ProfileState extends State<Profile> {
           });
         } else {
           // Toast.show("Error Update",context);
-          Fluttertoast.showToast(msg: 'Error Update');
+          Fluttertoast.showToast(msg: 'Error Update', timeInSecForIosWeb: 4);
         }
       }).catchError((error) {
         if (kDebugMode) {
           print(error);
         }
         //Toast.show("Error",context);
-        Fluttertoast.showToast(msg: 'Error');
+        Fluttertoast.showToast(msg: 'Error', timeInSecForIosWeb: 4);
       });
     }
   }
@@ -130,7 +170,7 @@ class _ProfileState extends State<Profile> {
   delete() async {
     ImageSharedPrefs.emptyPrefs();
     setState(() {
-      _image = null;
+      //_image = null;
     });
     //await auth.signOut();
     String delUserID = _conDelUserId.text;
@@ -139,7 +179,8 @@ class _ProfileState extends State<Profile> {
       if (value == 1) {
         // Toast.show("Successfully Deleted",context);
         Fluttertoast.showToast(
-            msg: "${_conUserName.text}, Successfully SignOut");
+            msg: "${_conUserName.text}, Successfully SignOut",
+            timeInSecForIosWeb: 4);
 
         updateSP(
                 UserModel(
@@ -199,6 +240,7 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: 10),
             GestureDetector(
               onTap: () {
+                print("Image: $_image");
                 pickImage(ImageSource.gallery);
               },
               child: CircleAvatar(
@@ -279,7 +321,7 @@ class _ProfileState extends State<Profile> {
               ),
               child: ListTile(
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=> ));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=> Setting()));
                 },
                 title: Text("Setting",
                     style: TextStyle(
@@ -348,18 +390,21 @@ class ImageSharedPrefs {
   }
 
   static Future<bool> emptyPrefs() async {
+    print("nshkbc");
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     return await prefs.clear();
   }
 
   static Future<String> loadImageFromPrefs() async {
+    print("dhshbsd");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(IMAGE_KEY);
   }
 
   // encodes bytes list as string
   static String base64String(Uint8List data) {
+    print("onject");
     return base64Encode(data);
   }
 
