@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:path/path.dart' as path;
-// import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_app/DataBase/DB_Helper/databse_Helper.dart';
 import 'package:shopping_app/DataBase/Model/user_Model.dart';
@@ -267,28 +265,46 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             SizedBox(height: 15),
-            _conUserName.text.isEmpty
-                ? Text(name,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20))
-                : Text(_conUserName.text,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
-            _conEmail.text.isEmpty
-                ? Text(email,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 17))
-                : Text(_conEmail.text,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 17)),
+            Form(
+              key: _formKey,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _conUserName.text.isEmpty
+                          ? Text(name,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20))
+                          : Text(_conUserName.text,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20)),
+                      _conEmail.text.isEmpty
+                          ? Text(email,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 17))
+                          : Text(_conEmail.text,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 17)),
+                    ],
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        //update();
+                      },
+                      icon: Icon(Icons.edit, color: Colors.black, size: 25))
+                ],
+              ),
+            ),
             SizedBox(height: 10),
             Container(
               margin: EdgeInsets.all(5),

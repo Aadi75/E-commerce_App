@@ -249,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                           ? Colors.grey
                           : Colors.white,
                   child: Container(
-                   // width: 50,
+                    // width: 50,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(

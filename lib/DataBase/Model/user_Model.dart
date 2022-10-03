@@ -8,8 +8,14 @@ class UserModel {
   String password;
   // String? img_url;
 
-  UserModel(/*this.user_id,*/ this.user_name, this.email, this.mobile, this.age,
-      this.password, /*this.img_url*/);
+  UserModel(
+    /*this.user_id,*/ this.user_name,
+    this.email,
+    this.mobile,
+    this.age,
+    this.password,
+    /*this.img_url*/
+  );
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
@@ -19,7 +25,7 @@ class UserModel {
       'mobile': mobile,
       'age': age,
       'password': password,
-     // 'img_url':img_url
+      // 'img_url':img_url
     };
     return map;
   }
@@ -31,6 +37,6 @@ class UserModel {
     mobile = map['mobile'];
     age = map['age'];
     password = map['password'];
-   // img_url = map['img_url'];
+    // img_url = map['img_url'];
   }
 }

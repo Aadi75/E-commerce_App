@@ -60,7 +60,7 @@ class Product {
         images:
             "https://images.unsplash.com/photo-1636016954413-44070ee44f8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fG1lbiUyMGNsb3RoZXN8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
         price: 300,
-        name: "Denim jacket"),
+        name: "Denim"),
     Product(
         images:
             "https://images.unsplash.com/photo-1617952236317-0bd127407984?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTQxfHxtZW4lMjBjbG90aGVzfGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60",
@@ -332,6 +332,6 @@ class Product {
         images:
             "https://images.unsplash.com/photo-1638792958866-9b3f787ec709?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjUxfHxraXRjaGVuJTIwYXBwbGlhbmNlc3xlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60",
         price: 2500,
-        name: "CakeMachine"),
+        name: "CakeMaker"),
   ];
 }
